@@ -56,7 +56,19 @@ class PlaneGame(object):
         pygame.sprite.groupcollide(self.hero.bullet_group,self.enemy_group,True,True)
 
         # 敌机撞英雄
-        pygame.sprite.spritecollide(self.hero,self.enemy_group,True)
+        enemies  = pygame.sprite.spritecollide(self.hero,self.enemy_group,True)
+
+        if len(enemies) > 0:
+            self.hero.kill()
+            #  清空所有的子弹 精灵组的 子弹
+            # self.hero.bullet_group.empty()
+            #   停止在事件队列上重复创建子弹事件
+            # pygame.time.set_timer(HERO_FIRE_EVENT, 0)
+            # Restart = pygame.image.load('./images/restart_sel.png')
+            # self.screen.blit(Restart, (0, 0))
+            # pygame.display.update()
+
+            PlaneGame.__game_over()
 
 
 
@@ -78,8 +90,8 @@ class PlaneGame(object):
         pygame.quit()
         exit()
 
+
     def start_game(self):
-        print('start')
         while True:
             # 1.设置刷新帧率
             self.clock.tick(FRAME_PER_SEC)
@@ -91,6 +103,7 @@ class PlaneGame(object):
             self.__update_sprites()
             # 5.更新显示
             pygame.display.update()
+
 
 
 if __name__ == '__main__':

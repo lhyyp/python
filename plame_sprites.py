@@ -96,7 +96,9 @@ class Bullet(GrameSprite):
         super().__init__('./images/bullet.png', -2)
 
     def __del__(self):
-        print('子弹销毁')
+        pass
+        # print('子弹销毁')
+
 
     def update(self):
         super().update()
